@@ -10,30 +10,16 @@ import java.sql.SQLException;
 
 @Slf4j
 class MariaDBConnector implements DatabaseConnector {
-    static final String HOST;
-    static final Integer PORT;
-    static final String USER;
-    static final String PASSWORD;
-    static final String DATABASE;
-
-    static {
-        HOST = System.getenv("MARIADB_HOST");
-        PORT = Integer.valueOf(System.getenv("MARIADB_PORT"));
-        USER = System.getenv("MARIADB_USER");
-        PASSWORD = System.getenv("MARIADB_PASSWORD");
-        DATABASE = System.getenv("MARIADB_DATABASE");
-    }
-
     private final MariaDbPoolDataSource dataSource;
 
-    MariaDBConnector() {
+    public MariaDBConnector(String host, String port, String user, String password, String database) {
         try {
             log.info("Detected driver: {}", org.mariadb.jdbc.Driver.class.getName());
 
             Configuration configuration = new Configuration.Builder()
-                    .addresses(HostAddress.from(HOST, PORT, true))
-                    .user(USER)
-                    .database(DATABASE)
+                    .addresses(HostAddress.from(host, Integer.parseInt(port), true))
+                    .user(user)
+                    .database(database)
                     .autocommit(true)
                     .connectTimeout(30000)
                     .maxIdleTime(300000)
@@ -44,7 +30,7 @@ class MariaDBConnector implements DatabaseConnector {
                     .allowMultiQueries(true)
                     .build();
 
-            dataSource = new MariaDbPoolDataSource(configuration.initialUrl() + "&password=" + PASSWORD);
+            dataSource = new MariaDbPoolDataSource(configuration.initialUrl() + "&password=" + password);
         } catch (SQLException e) {
             throw new RuntimeException("Failed to configure DataSource");
         }
