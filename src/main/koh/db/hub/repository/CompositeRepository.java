@@ -1,6 +1,6 @@
 package koh.db.hub.repository;
 
-import koh.db.hub.EntityManager;
+import koh.db.hub.DataHub;
 import lombok.Data;
 import org.jooq.Field;
 import org.jooq.Record;
@@ -19,7 +19,7 @@ public class CompositeRepository extends AbstractRepository {
         Field<String> volumeIdsField = DSL.groupConcatDistinct(CONTAINER_VOLUME.VOLUME_ID).as("volume_ids");
         Field<String> networkIdsField = DSL.groupConcatDistinct(CONTAINER_NETWORK.NETWORK_ID).as("network_ids");
 
-        Select<?> query = EntityManager
+        Select<?> query = DataHub
                 .useContext()
                 .select(userIdField, containerIdField, imageIdField, volumeIdsField, networkIdsField)
                 .from(USER_CONTAINER)

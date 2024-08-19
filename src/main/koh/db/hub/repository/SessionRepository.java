@@ -1,6 +1,6 @@
 package koh.db.hub.repository;
 
-import koh.db.hub.EntityManager;
+import koh.db.hub.DataHub;
 import koh.db.hub.vps_management.tables.records.SessionRecord;
 import org.jooq.Condition;
 
@@ -29,6 +29,6 @@ public class SessionRepository {
                 .eq(sessionId)
                 .and(SESSION.USER_ID.eq(userId))
                 .and(SESSION.EXPIRE_TIME.eq(expireTime));
-        return EntityManager.fetch(SESSION, List.of(c)).stream().findAny();
+        return DataHub.useContext().fetch(SESSION, List.of(c)).stream().findAny();
     }
 }

@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 @Slf4j
-class MariaDBConnector implements DatabaseConnector {
+class MariaDBConnector {
     private final MariaDbPoolDataSource dataSource;
 
     public MariaDBConnector(String host, String port, String user, String password, String database) {
@@ -36,7 +36,6 @@ class MariaDBConnector implements DatabaseConnector {
         }
     }
 
-    @Override
     public DataSource getDataSource() {
         return dataSource;
     }

@@ -1,6 +1,6 @@
 package koh.db.hub.repository;
 
-import koh.db.hub.EntityManager;
+import koh.db.hub.DataHub;
 import koh.db.hub.vps_management.tables.records.UserRecord;
 import org.jooq.Condition;
 
@@ -19,6 +19,6 @@ public class UserRepository {
 
     public Optional<UserRecord> getUserByEmailAndPassword(String email, String password) {
         Condition c = USER.EMAIL.eq(email).and(USER.PASSWORD.eq(password));
-        return EntityManager.fetch(USER, List.of(c)).stream().findAny();
+        return DataHub.useContext().fetch(USER, List.of(c)).stream().findAny();
     }
 }

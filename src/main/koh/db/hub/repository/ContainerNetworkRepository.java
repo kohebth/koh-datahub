@@ -1,6 +1,6 @@
 package koh.db.hub.repository;
 
-import koh.db.hub.EntityManager;
+import koh.db.hub.DataHub;
 import koh.db.hub.vps_management.tables.records.ContainerNetworkRecord;
 import koh.db.hub.vps_management.tables.records.DockerContainerRecord;
 import koh.db.hub.vps_management.tables.records.DockerNetworkRecord;
@@ -10,7 +10,7 @@ public class ContainerNetworkRepository extends AbstractRepository {
             DockerContainerRecord container,
             DockerNetworkRecord network
     ) {
-        ContainerNetworkRecord containerNetwork = EntityManager
+        ContainerNetworkRecord containerNetwork = DataHub
                 .useContext()
                 .newRecord(CONTAINER_NETWORK)
                 .setContainerId(container.getId())
@@ -19,7 +19,7 @@ public class ContainerNetworkRepository extends AbstractRepository {
     }
 
     public void deleteContainerNetworkConnect(DockerContainerRecord container, DockerNetworkRecord image) {
-        EntityManager
+        DataHub
                 .useContext()
                 .newRecord(CONTAINER_NETWORK)
                 .setContainerId(container.getId())
