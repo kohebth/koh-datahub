@@ -4,6 +4,7 @@ CREATE TABLE vps_management.`docker_volume` (
 	`name` varchar(64) NOT NULL,
 	`host` varchar(256) NOT NULL,
 	`virtual` varchar(256) NOT NULL,
+	`size_in_mb` MEDIUMINT NOT NULL,
 	`type` ENUM ('VOLUME', 'BIND', 'TMPFS'),
 	CONSTRAINT docker_volume_pk PRIMARY KEY (`id`),
 	UNIQUE (`name`)
