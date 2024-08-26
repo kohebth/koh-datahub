@@ -21,4 +21,10 @@ public class UserRepository {
         Condition c = USER.EMAIL.eq(email).and(USER.PASSWORD.eq(password));
         return DataHub.useContext().fetch(USER, List.of(c)).stream().findAny();
     }
+    
+    
+    public Optional<UserRecord> getUserByEmail(String email) {
+        Condition c = USER.EMAIL.eq(email);
+        return DataHub.useContext().fetch(USER, List.of(c)).stream().findAny();
+    }
 }
