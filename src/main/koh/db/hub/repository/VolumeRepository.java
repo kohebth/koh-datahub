@@ -15,13 +15,14 @@ public class VolumeRepository extends AbstractRepository {
         return DataHub.useContext().fetch(DOCKER_VOLUME.where(DOCKER_VOLUME.ID.in(ids)));
     }
 
-    public DockerVolumeRecord createVolume(String name, String host, String virtual) {
+    public DockerVolumeRecord createVolume(String name, String host, String virtual, int sizeInMb) {
         DockerVolumeRecord r = DataHub
                 .useContext()
                 .newRecord(DOCKER_VOLUME)
                 .setName(name)
                 .setHost(host)
                 .setVirtual(virtual)
+                .setSizeInMb(sizeInMb)
                 .setType(DockerVolumeType.BIND);
         return r.insert() == 1 ? r : null;
     }

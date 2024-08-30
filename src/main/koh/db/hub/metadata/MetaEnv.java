@@ -1,10 +1,10 @@
 package koh.db.hub.metadata;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.util.Map;
 
-@AllArgsConstructor
+@Data
 public class MetaEnv {
     private final Map<String, String> envMap;
 }

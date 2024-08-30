@@ -1,5 +1,9 @@
 package koh.db.hub.metadata;
 
-public class MetaSecret {
+import lombok.Data;
 
+@Data
+public class MetaSecret {
+    String user;
+    String password;
 }
