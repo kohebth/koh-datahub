@@ -14,6 +14,14 @@ public class UserMetadataRepository extends AbstractRepository {
         return DataHub.useContext().fetch(USER_METADATA.where(USER_METADATA.USER_ID.eq(userId)));
     }
 
+    public Optional<UserMetadataRecord> getMetadata(Long userId, UserMetadataType type) {
+
+        Table<UserMetadataRecord> table = USER_METADATA.where(USER_METADATA.USER_ID
+                .eq(userId)
+                .and(USER_METADATA.TYPE.eq(type)));
+        return Optional.ofNullable(DataHub.useContext().fetchOne(table));
+    }
+
     public Optional<UserMetadataRecord> getMetadata(String email, UserMetadataType type) {
         Table<Record> table = USER_METADATA
                 .join(USER)

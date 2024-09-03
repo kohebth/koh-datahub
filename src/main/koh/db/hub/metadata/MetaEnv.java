@@ -2,8 +2,8 @@ package koh.db.hub.metadata;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 public class MetaEnv {
@@ -12,12 +12,11 @@ public class MetaEnv {
     Integer containerLimit = 1;
     Integer memoryLimit = 512;
     Integer databaseLimit = 1;
-    List<Credential> credentials = new ArrayList<>();
+    Map<Long, Credential> credentials = new HashMap<>();
 
     @Data
     public static class Credential {
-        Long rid = null;
         String type = null;
-        String content = null;
+        Map<String, String> content = new HashMap<>();
     }
 }

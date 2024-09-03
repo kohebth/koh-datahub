@@ -27,4 +27,9 @@ public class UserRepository {
         Condition c = USER.EMAIL.eq(email);
         return DataHub.useContext().fetch(USER, List.of(c)).stream().findAny();
     }
+
+    public Optional<UserRecord> getUserById(Long id) {
+        Condition c = USER.ID.eq(id);
+        return DataHub.useContext().fetch(USER, List.of(c)).stream().findFirst();
+    }
 }
